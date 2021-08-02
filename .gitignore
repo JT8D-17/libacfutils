@@ -1,3 +1,4 @@
+z_buildlog.txt
 .DS_Store
 *.o
 *.d
@@ -70,14 +71,14 @@ shapelib/libproj-win-64
 shapelib/libshape-linux-64
 shapelib/libshape-mac-64
 shapelib/libshape-win-64
-shapelib/proj-4.9.3
-shapelib/shapelib-1.4.1
+shapelib/proj-8.1.0
+shapelib/shapelib-1.5.0
 
-ocr/leptonica-1.75.1
+ocr/leptonica-1.81.1
 ocr/liblept-linux-64
 ocr/liblept-mac-64
 ocr/liblept-win-64
-ocr/tesseract-3.05.00
+ocr/tesseract-4.1.1
 ocr/tesseract-linux-64
 ocr/tesseract-mac-64
 ocr/tesseract-win-64
@@ -93,7 +94,7 @@ openal-soft/openal-soft-*-win-64
 openal-soft/openal-soft-*-mac-64
 openal-soft/openal-soft-*-linux-64
 
-libxml2/libxml2-2.9.4
+libxml2/libxml2-v2.9.11
 libxml2/libxml2-linux-64
 libxml2/libxml2-win-64
 libxml2/libxml2-mac-64
@@ -118,7 +119,7 @@ glew/glew-1.13.0-mac-64
 glew/glew-1.13.0-win-64
 
 cairo/cairo-1.16.0
-cairo/pixman-0.36.0
+cairo/pixman-0.40.0
 
 libclipboard/libclipboard-linux-64
 

@@ -17,8 +17,8 @@
 
 source ../build_dep.common
 
-LEPTONICA="leptonica-1.75.1.tar.xz"
-TESSERACT="tesseract-3.05.00.tar.xz"
+LEPTONICA="leptonica-1.81.1.tar.gz"
+TESSERACT="tesseract-4.1.1.tar.gz"
 
 CONFOPTS_LEPTONICA="--enable-static --disable-shared \
     --without-zlib --without-jpeg --without-giflib \

@@ -17,7 +17,7 @@
 
 source ../build_dep.common
 
-GEOGRAPHICLIB="GeographicLib-1.51.tar.xz"
+GEOGRAPHICLIB="GeographicLib-1.52.tar.gz"
 
 case `uname` in
 	Linux)

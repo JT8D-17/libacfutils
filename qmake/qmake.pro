@@ -34,6 +34,14 @@ minimal=$$system("test -f ../.minimal-deps; echo $?")
 INCLUDEPATH += ../src ../SDK/CHeaders/XPLM
 INCLUDEPATH += ../SDK/CHeaders/Widgets
 INCLUDEPATH += ../lzma/C
+INCLUDEPATH += ../openal-soft/openal-soft-1.21.1-win-64/include/AL
+INCLUDEPATH += ../opus/opusfile-win-64/include/opus
+INCLUDEPATH += ../opus/libogg-1.3.2/include
+INCLUDEPATH += ../opus/opus-linux-64/include/opus
+INCLUDEPATH += ../libxml2/libxml2-linux-64/include/libxml2
+INCLUDEPATH += ../libxml2/libxml2-linux-64/include
+INCLUDEPATH += ../glew/glew-1.13.0-linux-64/include
+INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
 INCLUDEPATH += ../junzip
 QMAKE_CFLAGS += -std=c11 -g -W -Wall -Wextra -fvisibility=hidden
 contains(noerrors, 0) {
@@ -62,7 +70,7 @@ contains(minimal, 1) {
 }
 
 DEFINES += LIBACFUTILS_VERSION=\'\"$$system("git rev-parse --short HEAD")\"\'
-DEFINES += GLEW_STATIC
+DEFINES += GLEW_STATIC GLEW_MX
 
 # JSMN library needs this to avoid multiply defined symbols
 DEFINES += JSMN_STATIC

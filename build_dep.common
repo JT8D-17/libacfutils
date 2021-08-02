@@ -80,6 +80,27 @@ function build_dep() {
 			done
 		fi
 	fi
+    # Dependencies that need to / can be autoreconfigured
+	reconfdeps=("cairo" "cglm" "curl"
+	"freetype" "libclipboard" "libjpeg" "libpng"
+	"libxml2" "ocr" "opus"
+	"pcre2" "shapelib" "ssl" "zlib"
+	)
+    basedir=$(basename "$PWD")
+	# Not "libiconv" "geographiclib"
+    ## Some dependencies to not like being autoreconfigured. Pick only those from the array above.
+    for i in "${reconfdeps[@]}"; do
+        if ! [ $basedir == ${reconfdeps[i]} ]; then
+            echo " "
+            echo "Generating/Updating configuration file"
+            echo " "
+            # read -p "Press any key to continue ..."
+            autoreconf -i "$SRCDIR"
+            echo " "
+            echo "Configuration processed. Starting build."
+            echo " "
+        fi
+    done
 	if [ -f "$BUILDDIR/$PRODFILE" ] && \
 	    [ "$BUILDDIR/$PRODFILE" -nt "$TARBALL" ]; then
 		SRCDIR=""

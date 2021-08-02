@@ -18,7 +18,7 @@
 source ../build_dep.common
 
 CAIRO="cairo-1.16.0.tar.xz"
-PIXMAN="pixman-0.36.0.tar.xz"
+PIXMAN="pixman-0.40.0.tar.gz"
 
 PIXMAN_PRODUCT="lib/libpixman-1.a"
 PIXMAN_CONFOPTS_COMMON="--enable-static --disable-shared --disable-gtk \

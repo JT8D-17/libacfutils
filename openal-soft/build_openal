@@ -15,12 +15,12 @@
 
 # Copyright 2021 Saso Kiselkov. All rights reserved.
 
-FILE="openal-soft-1.21.0.tar.bz2"
+FILE="openal-soft-1.21.1.tar.gz"
 if [[ "$1" = "--openal-version=1.19.1" ]]; then
 	shift
-	FILE="openal-soft-1.19.1.tar.bz2"
+	FILE="openal-soft-openal-soft-1.19.1.tar.gz"
 fi
-DIR="${FILE/%.tar.bz2/}"
+DIR="${FILE/%.tar.gz/}"
 
 [ -d "$DIR" ] && rm -rf "$DIR"
 
@@ -57,11 +57,11 @@ case $(uname) in
 			rm -rf "$DIR-win-64"
 		elif ! [ -f "$PRODUCT" ]; then
 			rm -fr "$DIR-win-64"
-			tar xjvf "$FILE" && mv "$DIR" "$DIR-win-64"
+			tar xzvf "$FILE" && mv "$DIR" "$DIR-win-64"
 			( cd "$DIR-win-64" && ln -s ../../mingw-std-threads \
 			    mingw_stdthreads )
-			( cd "$DIR-win-64" && \
-			    patch -p1 < ../mingw_stdthreads.patch )
+			#( cd "$DIR-win-64" && \
+			#     patch -p1 < ../mingw_stdthreads.patch )
 			sed -i '/CMAKE_INSTALL_PREFIX/ d;' \
 			    "$DIR-win-64/XCompile.txt"
 			sed -i ' /dllexport/ d;' \
@@ -84,7 +84,7 @@ case $(uname) in
 			rm -rf "$DIR-linux-64"
 		elif ! [ -f "$PRODUCT" ]; then
 			rm -fr "$DIR-linux-64" && \
-			tar xjvf "$FILE" && mv "$DIR" "$DIR-linux-64" && \
+			tar xzvf "$FILE" && mv "$DIR" "$DIR-linux-64" && \
 			do_build "linux-64" \
 			    "-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
 			    -DALSOFT_REQUIRE_ALSA=ON \
@@ -100,7 +100,7 @@ case $(uname) in
 			rm -rf "$DIR-mac-64"
 		elif ! [ -f "$PRODUCT" ]; then
 			rm -fr "$DIR-mac-64" && \
-			tar xjvf "$FILE" && mv "$DIR" "$DIR-mac-64" && \
+			tar xzvf "$FILE" && mv "$DIR" "$DIR-mac-64" && \
 			( cd "$DIR-mac-64" && \
 			    patch -p1 < ../visibility.patch )
 			do_build "mac-64" \
