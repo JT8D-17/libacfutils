@@ -43,6 +43,10 @@ INCLUDEPATH += ../libxml2/libxml2-linux-64/include
 INCLUDEPATH += ../glew/glew-1.13.0-linux-64/include
 INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
 INCLUDEPATH += ../junzip
+INCLUDEPATH += ../libpng/libpng-linux-64/include
+INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
+INCLUDEPATH += ../freetype/freetype-linux-64/include/freetype2
+INCLUDEPATH += ../opus/opusfile-0.7/include
 QMAKE_CFLAGS += -std=c11 -g -W -Wall -Wextra -fvisibility=hidden
 contains(noerrors, 0) {
 	QMAKE_CFLAGS += -Werror

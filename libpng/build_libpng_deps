@@ -32,7 +32,7 @@ case `uname` in
 		    LDFLAGS="$LDFLAGS_COMMON\\ -L$(pwd)/../zlib/zlib-win-64/lib" \
 		    CUSTPREPCMD="ln -s $(pwd)/../zlib/zlib-win-64/include/zconf.h \
 		    && ln -s $(pwd)/../zlib/zlib-win-64/include/zlib.h" \
-		    build_dep "win-64" "--enable-static --disable-shared \
+		    build_dep "win-64" "--enable-static --enable-shared \
 		    --host=x86_64-w64-mingw32" \
 		    "$LIBPNG" "libpng" "lib/libpng16.a"
 		;;

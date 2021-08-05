@@ -30,16 +30,19 @@ fi
 
 export PKG_CONFIG_PATH_IN="$(pwd)/../zlib/zlib-{PLATFORM}/lib/pkgconfig"
 
+# Let the AUR package mingw-w64-proj handle the dependency hell instead of building locally
+ln -s "/usr/x86_64-w64-mingw32" "$PWD/freetype-win-64"
+
 case `uname` in
 	Linux)
 		CFLAGS="-m64" LDFLAGS="-m64" \
 		    build_dep "linux-64" "$FREETYPE_CONFOPTS_COMMON" \
 		    "$FREETYPE" "freetype" "lib/libfreetype.a" \
-		    $FREETYPE_PATCH && \
-		build_dep "win-64" "$FREETYPE_CONFOPTS_COMMON \
-		    --enable-shared --host=x86_64-w64-mingw32" \
-		    "$FREETYPE" "freetype" "lib/libfreetype.a" \
-		    $FREETYPE_PATCH
+		    $FREETYPE_PATCH #&& \
+		#build_dep "win-64" "$FREETYPE_CONFOPTS_COMMON \
+		#    --enable-shared --host=x86_64-w64-mingw32" \
+		#    "$FREETYPE" "freetype" "lib/libfreetype.a" \
+		#    $FREETYPE_PATCH
 		;;
 	Darwin)
 		CFLAGS="$FREETYPE_CFLAGS_COMMON" \

@@ -26,13 +26,16 @@ else
 	PKG_CONFIG="true"
 fi
 
+# Let the AUR package mingw-w64-proj handle the dependency hell instead of building locally
+ln -s "/usr/x86_64-w64-mingw32" "$PWD/libproj-win-64"
+
 case `uname` in
 	Linux)
 		build_dep "linux-64" "--enable-static --disable-shared" \
 		    "$PROJ4" "libproj" "lib/libproj.a" && \
-		build_dep "win-64" "--enable-static --disable-shared \
-		    --host=x86_64-w64-mingw32" "$PROJ4" "libproj" \
-		    "lib/libproj.a" && \
+		#build_dep "win-64" "--enable-static --disable-shared \
+		#    --host=x86_64-w64-mingw32" "$PROJ4" "libproj" \
+		#    "lib/libproj.a" && \
 		build_dep "linux-64" "--enable-static --disable-shared \
 		    --with-proj-cflags=$(PKG_CONFIG_PATH=libproj-linux-64/lib/pkgconfig \
 		    $PKG_CONFIG --cflags proj) \
