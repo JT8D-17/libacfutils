@@ -81,15 +81,15 @@ function build_dep() {
 		fi
 	fi
     # Dependencies that need to / can be autoreconfigured
-	reconfdeps=( "libxml2" )
+	reconfdeps=( "libxml2" "cairo" "opus")
     basedir=$(basename "$PWD")
     ## Some dependencies to not like being autoreconfigured. Pick only those from the array above.
-    for i in "${reconfdeps[@]}"; do
+    for i in "${!reconfdeps[@]}"; do
         if [ $basedir == ${reconfdeps[i]} ]; then
             echo " "
             echo "Generating/Updating configuration file"
             echo " "
-            # read -p "Press any key to continue ..."
+            #read -p "Press any key to continue ..."
             
             autoreconf -i "$SRCDIR"
             
