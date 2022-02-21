@@ -166,7 +166,7 @@ signal_handler_init(void)
 	sigemptyset(&sig_action.sa_mask);
 
 #if	LIN
-	static uint8_t alternate_stack[SIGSTKSZ];
+	uint8_t alternate_stack[SIGSTKSZ];
 	stack_t ss = {
 	    .ss_sp = (void*)alternate_stack,
 	    .ss_size = SIGSTKSZ,
