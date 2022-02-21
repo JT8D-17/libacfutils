@@ -52,13 +52,6 @@ typedef struct {
 	list_node_t	node;
 } tooltip_t;
 
-typedef struct {
-	int		left;
-	int		top;
-	int		right;
-	int		bottom;
-} monitor_t;
-
 struct tooltip_set {
 	XPLMWindowID	window;
 	int		orig_w;
@@ -139,8 +132,8 @@ find_first_monitor(int idx, int left, int top, int right, int bottom,
 	}
 }
 
-static monitor_t
-get_first_monitor_bounds(void)
+monitor_t
+lacf_get_first_monitor_bounds(void)
 {
 	monitor_t mon = {};
 
@@ -159,7 +152,7 @@ get_first_monitor_bounds(void)
 static void
 center_window_coords(int *left, int *top, int *right, int *bottom)
 {
-	monitor_t mon = get_first_monitor_bounds();
+	monitor_t mon = lacf_get_first_monitor_bounds();
 	int width = (*right) - (*left);
 	int height = (*top) - (*bottom);
 
@@ -413,6 +406,7 @@ tooltip_floop_cb(float elapsed_since_last_call, float elapsed_since_last_floop,
 		XPLMGetWindowGeometry(tts->window, &wleft, &wtop, &wright,
 		    &wbottom);
 		if (!XPLMGetWindowIsVisible(tts->window) ||
+		    !XPLMIsWindowInFront(tts->window) ||
 		    mouse_x < wleft || mouse_x > wright ||
 		    mouse_y < wbottom || mouse_y > wtop)
 			continue;

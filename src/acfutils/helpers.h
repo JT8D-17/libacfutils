@@ -397,6 +397,43 @@ vsprintf_alloc(const char *fmt, va_list ap)
 	return (str);
 }
 
+/*
+ * Portable version of BSD & POSIX strcasecmp.
+ */
+static inline int
+lacf_strcasecmp(const char *s1, const char *s2)
+{
+	int l1, l2, res;
+
+	ASSERT(s1 != NULL);
+	ASSERT(s2 != NULL);
+
+	l1 = strlen(s1);
+	l2 = strlen(s2);
+
+	if (l1 < 4096 && l2 < 4096) {
+		char s1_lower[l1 + 1], s2_lower[l2 + 1];
+
+		lacf_strlcpy(s1_lower, s1, l1 + 1);
+		lacf_strlcpy(s2_lower, s2, l2 + 1);
+		strtolower(s1_lower);
+		strtolower(s2_lower);
+		res = strcmp(s1_lower, s2_lower);
+	} else {
+		char *s1_lower = (char *)safe_malloc(l1 + 1);
+		char *s2_lower = (char *)safe_malloc(l2 + 1);
+
+		lacf_strlcpy(s1_lower, s1, l1 + 1);
+		lacf_strlcpy(s2_lower, s2, l2 + 1);
+		strtolower(s1_lower);
+		strtolower(s2_lower);
+		res = strcmp(s1_lower, s2_lower);
+		free(s1_lower);
+		free(s2_lower);
+	}
+	return (res);
+}
+
 static inline int
 fixed_decimals(double x, int digits)
 {
@@ -465,17 +502,6 @@ API_EXPORT DIR *opendir(const char *path);
 API_EXPORT struct dirent *readdir(DIR *dirp);
 #define	closedir	ACFSYM(closedir)
 API_EXPORT void closedir(DIR *dirp);
-
-#if	!defined(_MSC_VER) && !defined(LACF_HIDE_STAT_COMPAT)
-/* A minimally compatible POSIX-style file stat reading implementation */
-#define	stat		ACFSYM(stat)
-struct stat {
-	uint64_t	st_size;
-	time_t		st_atime;
-	time_t		st_mtime;
-};
-API_EXPORT int stat(const char *pathname, struct stat *buf);
-#endif	/* !defined(_MSC_VER) && !defined(LACF_HIDE_STAT_COMPAT) */
 
 #define	sleep(x)	SleepEx((x) * 1000, FALSE)
 #define	usleep(x)	SleepEx((x) / 1000, FALSE)

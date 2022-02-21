@@ -33,6 +33,7 @@ typedef struct airportdb {
 	bool_t		inited;
 	bool_t		ifr_only;
 	bool_t		normalize_gate_names;
+	bool_t		override_settings;
 	char		*xpdir;
 	char		*cachedir;
 	int		xp_airac_cycle;
@@ -147,6 +148,9 @@ struct airport {
 	/* 2-letter ICAO country/region code, nul terminated */
 	char		cc[AIRPORTDB_CC_LEN];
 	char		name[24];	/* Airport name, nul terminated */
+	char		*name_orig;	/* Non-normalized version of name */
+	char		*country;	/* Country name, nul terminated */
+	char		*city;		/* City name, nul terminated */
 	geo_pos3_t	refpt;		/* airport reference point location */
 					/* (^^^ elev in FEET!) */
 	geo_pos3_t	refpt_m;	/* same as refpt, but elev in meters */
@@ -163,6 +167,7 @@ struct airport {
 	vect3_t		ecef;		/* refpt ECEF coordinates */
 	fpp_t		fpp;		/* ortho fpp centered on refpt */
 	bool_t		in_navdb;	/* used by recreate_apt_dat_cache */
+	bool_t		have_iaps;	/* used by recreate_apt_dat_cache */
 
 	avl_node_t	apt_dat_node;	/* apt_dat tree */
 	list_node_t	cur_arpts_node;	/* cur_arpts list */
@@ -206,6 +211,7 @@ API_EXPORT void airportdb_unlock(airportdb_t *db);
  */
 #define	recreate_cache			ACFSYM(recreate_cache)
 API_EXPORT bool_t recreate_cache(airportdb_t *db);
+API_EXPORT bool_t adb_recreate_cache(airportdb_t *db, int app_version);
 
 #define	find_nearest_airports		ACFSYM(find_nearest_airports)
 API_EXPORT list_t *find_nearest_airports(airportdb_t *db, geo_pos2_t my_pos);

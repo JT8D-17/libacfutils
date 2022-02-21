@@ -109,6 +109,7 @@ struct chartdb_s {
 	chart_prov_id_t	prov;
 	char		prov_name[32];
 	avl_tree_t	arpts;
+	bool_t		normalize_non_icao;
 
 	/* immutable after provider init */
 	bool_t		flat_db;
@@ -147,6 +148,7 @@ typedef struct {
 chart_arpt_t *chartdb_add_arpt(chartdb_t *cdb, const char *icao,
     const char *name, const char *city_name, const char *state_id);
 bool_t chartdb_add_chart(chart_arpt_t *arpt, chart_t *chart);
+void chartdb_chart_destroy(chart_t *chart);
 char *chartdb_mkpath(chart_t *chart);
 
 char *chartdb_pdf_convert_file(const char *pdftoppm_path, char *old_path,

@@ -129,6 +129,13 @@ delay_line_get_delay(const delay_line_t *line)
 	return (line->delay_base_us);
 }
 
+static inline uint64_t
+delay_line_get_delay_act(const delay_line_t *line)
+{
+	ASSERT(line != NULL);
+	return (line->delay_us);
+}
+
 static inline void
 delay_line_set_rand(delay_line_t *line, double rand_fract)
 {
@@ -194,6 +201,19 @@ DEF_DELAY_LINE_PEEK(uint64_t, u64)
 DEF_DELAY_LINE_PEEK(double, f64)
 
 /*
+ * Functions to peek at the new value in a delay line without ever
+ * affecting its state change to a new value. Can be used in combination
+ * with delay_line_push_* to look for a state change in a delay line in
+ * response to the passage of time.
+ *	delay_line_pull_i64_new	- peeks at the delay line as an int64_t
+ *	delay_line_pull_u64_new	- peeks at the delay line as a uint64_t
+ *	delay_line_pull_f64_new	- peeks at the delay line as a double
+ */
+DEF_DELAY_LINE_PEEK(int64_t, i64_new)
+DEF_DELAY_LINE_PEEK(uint64_t, u64_new)
+DEF_DELAY_LINE_PEEK(double, f64_new)
+
+/*
  * Functions that push a new value to a delay line:
  *	delay_line_push_i64	- pushes an int64_t to the delay line
  *	delay_line_push_u64	- pushes a uint64_t to the delay line
@@ -214,6 +234,7 @@ delay_line_push_ ## abbrev_type(delay_line_t *line, typename value) \
 	if (line->abbrev_type == line->abbrev_type ## _new && \
 	    value != line->abbrev_type ## _new) { \
 		line->changed_t = now; \
+		delay_line_refresh_delay(line); \
 	} \
 	line->abbrev_type ## _new = value; \
 	return (delay_line_pull_ ## abbrev_type(line)); \
