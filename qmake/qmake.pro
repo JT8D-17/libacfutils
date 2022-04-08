@@ -34,19 +34,21 @@ minimal=$$system("test -f ../.minimal-deps; echo $?")
 INCLUDEPATH += ../src ../SDK/CHeaders/XPLM
 INCLUDEPATH += ../SDK/CHeaders/Widgets
 INCLUDEPATH += ../lzma/C
+INCLUDEPATH += ../zlib/zlib-linux-64/include
+INCLUDEPATH += ../curl/libcurl-linux-64/include
 INCLUDEPATH += ../openal-soft/openal-soft-1.21.1-win-64/include/AL
 INCLUDEPATH += ../opus/opusfile-win-64/include/opus
 INCLUDEPATH += ../opus/libogg-1.3.2/include
 INCLUDEPATH += ../opus/opus-linux-64/include/opus
 INCLUDEPATH += ../libxml2/libxml2-linux-64/include/libxml2
-INCLUDEPATH += ../libxml2/libxml2-linux-64/include
+#INCLUDEPATH += ../libxml2/libxml2-linux-64/include
 INCLUDEPATH += ../glew/glew-1.13.0-linux-64/include
 INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
 INCLUDEPATH += ../junzip
 INCLUDEPATH += ../libpng/libpng-linux-64/include
-INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
+#INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
 INCLUDEPATH += ../freetype/freetype-linux-64/include/freetype2
-INCLUDEPATH += ../opus/opusfile-0.7/include
+#INCLUDEPATH += ../opus/opusfile-0.7/include
 QMAKE_CFLAGS += -std=c11 -g -W -Wall -Wextra -fvisibility=hidden
 contains(noerrors, 0) {
 	QMAKE_CFLAGS += -Werror
@@ -154,6 +156,8 @@ linux-g++-64 {
 		QMAKE_CFLAGS += $$system("../pkg-config-deps linux-64 --cflags")
 	}
 	QMAKE_CFLAGS += -Wno-misleading-indentation
+	LIBS += $$system("../pkg-config-deps linux-64 \
+	    --static-openal --libs")
 }
 
 macx {

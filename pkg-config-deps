@@ -38,7 +38,7 @@ GLEWMX=1
 WHOLE_ARCH_ON=""
 WHOLE_ARCH_OFF=""
 LINK_ACFUTILS=1
-OPENAL_VERSION="1.21.0"
+OPENAL_VERSION="1.21.1"
 
 cd "$(dirname "$0")"
 
@@ -135,12 +135,12 @@ $(pwd)/geographiclib/geographiclib-$ARCH/cmake"
 
 if [[ "$ARCH" == "linux-64" ]]; then
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH:\
-$(pwd)/glew/glew-1.13.0-$ARCH/install/lib64/pkgconfig:\
+$(pwd)/glew/glew-1.13.0-$ARCH/lib/pkgconfig:\
 $(pwd)/libclipboard/libclipboard-$ARCH/install/lib/pkgconfig"
 	PACKAGES="$PACKAGES libclipboard"
 else
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH:\
-$(pwd)/glew/glew-1.13.0-$ARCH/install/lib/pkgconfig"
+$(pwd)/glew/glew-1.13.0-$ARCH/lib/pkgconfig"
 fi
 
 export PKG_CONFIG_PATH

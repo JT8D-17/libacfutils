@@ -62,36 +62,20 @@ if [[ "$do_clean" != 1 ]]; then
 	( cd mingw-std-threads && git checkout master )
 fi
 
-( cd zlib && ./build_zlib_deps && echo "=> Processed zlib" ) && \
-    ( cd libiconv && ./build_libiconv_deps && echo "=> Processed libiconv" ) && \
     ( cd libclipboard && ./build_libclipboard_deps && echo "=> Processed libclipboard" ) && \
-    ( [ $minimal -eq 1 ] || ( cd libpng && ./build_libpng_deps && echo "=> Processed libpng" ) ) && \
     ( [ $minimal -eq 1 ] || ( cd libjpeg && ./build_libjpeg_deps && echo "=> Processed libjpg" ) ) && \
-    ( cd libxml2 && ./build_libxml2_deps && echo "=> Processed libxml2" ) && \
-    ( [ $minimal -eq 1 ] || ( cd freetype && ./build_freetype_deps && echo "=> Processed freetype" ) ) && \
-    ( [ $minimal -eq 1 ] || ( cd cairo && ./build_cairo_deps && echo "=> Processed cairo" ) ) && \
-    ( [ $minimal -eq 1 ] || ( cd opus && ./build_opus_deps && echo "=> Processed opus" ) ) && \
-    ( cd ssl && ./build_ssl_deps && echo "=> Processed ssl" ) && \
-    ( cd curl && ./build_curl_deps && echo "=> Processed curl" ) && \
-    ( [ $minimal -eq 1 ] || ( cd shapelib && ./build_shapelib_deps && echo "=> Processed shapelib" ) ) && \
     # ( [ $minimal -eq 1 ] || [ $no_tesseract -eq 1 ] || ( cd ocr && ./build_ocr_deps && echo "=> Processed ocr" ) ) && \
-    ( cd pcre2 && ./build_pcre2_deps && echo "=> Processed pcre2") && \
-    ( [ $minimal -eq 1 ] || ( cd glew && ./build_glew_deps && echo "=> Processed glew" ) ) && \
     ( [ $minimal -eq 1 ] || ( cd openal-soft && ./build_openal && echo "=> Processed openal-soft" ) ) && \
     ( [ $minimal -eq 1 ] || ( cd cglm && ./build_cglm && echo "=> Processed cglm" ) ) && \
     ( [ $minimal -eq 1 ] || ( cd geographiclib && ./build_geographiclib && echo "=> Processed geographiclib" ) ) && \
     ( cd lzma/qmake && \
-	if [ $(uname) = Darwin ]; then \
-		if ! [ -f mac-64/liblzma.a ]; then
-			./build-mac
-		fi
-	else
-		if ( ! [ -f win-64/liblzma.a ] && [ "$minimal" -eq 0 ] ) || \
-		    ! [ -f linux-64/liblzma.a ];
-		    then
-			./build-win-lin
-		fi
-	fi )
+	if ( ! [ -f win-64/liblzma.a ] && [ "$minimal" -eq 0 ] ) || \
+		! [ -f linux-64/liblzma.a ];
+		then
+		./build-win-lin
+	fi
+	)
+	echo "=> All dependencies have been built"
 }
 
 clean_buildlog

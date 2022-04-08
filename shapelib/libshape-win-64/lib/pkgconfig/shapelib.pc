@@ -1,0 +1,12 @@
+prefix=/media/Simulators/0_Git_Repos/libacfutils/shapelib/libshape-linux-64
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+includedir=${prefix}/include
+
+Name: shapelib
+Description: C API for processing ESRI Shapefiles
+Version: 1.5.0
+Libs: -L${libdir} -lshp
+Cflags: -I${includedir}

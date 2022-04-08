@@ -1,0 +1,14 @@
+prefix=/media/Simulators/0_Git_Repos/libacfutils/freetype/freetype-linux-64
+exec_prefix=/media/Simulators/0_Git_Repos/libacfutils/freetype/freetype-linux-64
+libdir=/media/Simulators/0_Git_Repos/libacfutils/freetype/freetype-linux-64/lib
+includedir=/media/Simulators/0_Git_Repos/libacfutils/freetype/freetype-linux-64/include
+
+Name: FreeType 2
+URL: http://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 21.0.15
+Requires:
+Requires.private: zlib
+Libs: -L${libdir} -lfreetype
+Libs.private: 
+Cflags: -I${includedir}/freetype2

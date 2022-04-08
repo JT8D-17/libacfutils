@@ -80,8 +80,8 @@ CONST
     { X-Plane itself                                                             }
    XPLM_PLUGIN_XPLANE   = (0);
 
-    { The current XPLM revision is 3.01 (301).                                   }
-   kXPLM_Version        = (301);
+    { The current XPLM revision is 3.03 (303).                                   }
+   kXPLM_Version        = (303);
 
    {
     XPLMKeyFlags

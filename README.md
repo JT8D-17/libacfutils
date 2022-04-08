@@ -1,6 +1,6 @@
 # libacfutils
 
-Fork of [skiselkov](https://github.com/skiselkov)'s [libacfutils](https://github.com/skiselkov/libacfutils) repo fixing build errors on Arch Linux. Intended for use to build [librain from this forked repository](https://github.com/JT8D-17/librain) for Linux and Windows (via MingW).    
+Fork of [skiselkov](https://github.com/skiselkov)'s [libacfutils](https://github.com/skiselkov/libacfutils) repo streamlining the build process. Intended for use to build [librain from this forked repository](https://github.com/JT8D-17/librain) for Linux and Windows (via MingW).    
 Please visit the [original repo](https://github.com/skiselkov/libacfutils)  for the original readme and data.
 
 &nbsp;
@@ -16,31 +16,20 @@ The standard packages that are required for building `libacfutils`:
 `base-devel`, `cmake`, `libtool`, `unzip`, `qt5-base`, `libxcursor`, `glu`, `libpulse`, `alsa-lib`, `mingw-w64-gcc`    
 (List may be incomplete or too extensive.)
 
-For this fork, these AUR packages (mind their dependencies!):
-
-- [mingw-w64-proj](https://aur.archlinux.org/packages/mingw-w64-proj/)
-- [mingw-w64-freetype2](https://aur.archlinux.org/packages/mingw-w64-freetype2/)
-
-(Hint: Add [the unofficial ownstuff repository](https://wiki.archlinux.org/title/unofficial_user_repositories#ownstuff) to pacman if you want to download binaries instead of having to compile everything.)
-
-
-
-
 &nbsp;
 
 ## Changes
 
-- Updated source packages for `cairo`, `geographiclib`, `libiconv`, `libxml2`, `ocr`, `openal-soft`, `shapelib`, `zlib`
-- Added build logging to `build_deps.sh`
+- Updated `cglm`, `geographiclib`,`ocr`, `openal-soft`, X-Plane `SDK`
+- Prebuilt linux-64 and win-64 libraries for `cairo`, `curl`, `freetype`, `glew`, `libiconv`, `libpng`, `libxml`, `lzma`, `opus`, `pcre2`, `shapelib`, `ssl`, `zlib` dependencies to minimize compilation time sourced from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) 
+- Added `GL_for_Windows` (from [X-TCAS](https://github.com/skiselkov/X-TCAS)), `soil` and some `mingw64` dependencies for building [librain](https://github.com/skiselkov/librain) from this fork
+- Added build logging to `build_deps.sh`, which also only compiles non-prebuilt dependencies now.
 - Deactivated building `ocr` in `build_deps.sh` because it just did not work at all
-- Added a routine calling `autoreconf -i "$SRCDIR"` for `libxml2` to `build_dep.common`
-- Win64 `freetype2` now referenced from system (see package requirement above and `freetype/build_freetype_deps`)
-- Enabled shared DLL build for win64 `libpng`
-- Win64 `glew` now built regardless of "minimal" build script setting
-- Win64 `proj`(for `shapelib`) now referenced from systen (see package requirement above and `shapelib/build_shapelib_deps`)
-- Added more includes to `qmake\qmake.pro`
-- Added `GL_for_Windows`folder from [X-TCAS](https://github.com/skiselkov/X-TCAS) as a safety dependency for building [librain](https://github.com/skiselkov/librain) from this fork
-
+- Added a routine calling `autoreconf -i "$SRCDIR"` for `libxml2` to `build_dep.common` (not used due to prbuilt dependencies)
+- Modified `qmake\qmake.pro`
+- Added `qmake/build-lin` compilation script and `qmake/qmake-lin.pro` file
+- Added `qmake/fallback` folder containing old, prebuilt libraies from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) 
+- Modified `.gitignore` to consider prebuilt dependencies
 
 &nbsp;
 

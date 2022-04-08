@@ -1,0 +1,11 @@
+prefix=/home/bjoern/Downloads/libacfutils-master/glew/glew-1.13.0-win-64/install
+exec_prefix=${prefix}
+libdir=/home/bjoern/Downloads/libacfutils-master/glew/glew-1.13.0-win-64/install/lib
+includedir=${prefix}/include
+
+Name: glew
+Description: The OpenGL Extension Wrangler library
+Version: 1.13.0
+Cflags: -I${includedir} -DGLEW_MX
+Libs: -L${libdir} -lglew32mx
+Requires: 
