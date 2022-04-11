@@ -20,15 +20,16 @@ Standard Arch Linux packages that are required for building `libacfutils`:
 
 ## Changes
 
-- Updated `cglm`, `geographiclib`,`ocr`, `openal-soft`, X-Plane `SDK` dependencies
-- Prebuilt linux-64 and win-64 libraries for the `cairo`, `curl`, `freetype`, `glew`, `libiconv`, `libpng`, `libxml`, `lzma`, `opus`, `pcre2`, `shapelib`, `ssl`, `zlib` dependencies sourced from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) to minimize compilation time
-- Added `GL_for_Windows` (from [X-TCAS](https://github.com/skiselkov/X-TCAS)), `soil` and some `mingw64` dependencies for building [librain](https://github.com/skiselkov/librain) from this fork
-- Modified `build_deps.sh` to consider prebuilt dependencies, add build logging and deactivate building of `ocr` (which just doesn't work)
-- Modified `pkg-config-deps` to reflect updated `openal-soft` dependency
+- Prebuilt static libraries for all dependencies except `cglm` for linux-64 (`deps_lin-64` folder)  and win-64 (`deps_mingw64` folder)  to minimize compilation time. Sourced from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) or [Msys2](https://packages.msys2.org).
+- Updated X-Plane SDK dependency
+- Added `soil` dependency for building [librain](https://github.com/skiselkov/librain) from this fork
+- Removed `ocr` dependency for not being needed.
+- Modified `build_deps.sh` to consider prebuilt dependencies, added build logging
+- Modified `pkg-config-deps` to remove `pkg-config` routines which are not needed anymore.
 - Added a routine calling `autoreconf -i "$SRCDIR"` for `libxml2` to `build_dep.common` (not used due to prbuilt dependencies)
-- Modified `qmake/qmake.pro` to enable building for Linux and Windows
-- Added `qmake/build-lin` compilation script and `qmake/qmake-lin.pro` file
-- Added `qmake/fallback` folder containing old, prebuilt libraies from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) 
+- Modified `qmake/qmake.pro` to reflect change in dependency handling. Libraries are now stated directly instead of being looked for by `pkg-config`. Library load order is just as formerly specified in `pkg-config-deps`.
+- Modified `qmake/build-win-lin` to print compilation stage information
+- Added `qmake/fallback` folder containing old, prebuilt libraries from [libacfutils redist 0.32](https://github.com/skiselkov/libacfutils/releases/tag/v0.32) 
 - Modified `.gitignore` to consider prebuilt dependencies
 
 &nbsp;

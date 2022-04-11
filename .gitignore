@@ -16,36 +16,6 @@ build_opus_deps
 
 cglm/cglm-0.7.9
 
-geographiclib/GeographicLib-1.52
-geographiclib/geographiclib-linux-64
-geographiclib/geographiclib-mac-64
-geographiclib/geographiclib-win-64
-
-glfw/glfw-3.3
-glfw/glfw-linux-64
-glfw/glfw-mac-64
-glfw/glfw-win-64
-
-libclipboard/libclipboard-linux-64
-
-libjpeg/jpegsrc.v9c
-libjpeg/libjpeg-linux-64
-libjpeg/libjpeg-win-64
-libjpeg/libjpeg-mac-64
-
-ocr/leptonica-1.82.0
-ocr/liblept-linux-64
-ocr/liblept-mac-64
-ocr/liblept-win-64
-ocr/tesseract-5.1.0
-ocr/tesseract-linux-64
-ocr/tesseract-mac-64
-ocr/tesseract-win-64
-
-openal-soft/openal-soft-*-win-64
-openal-soft/openal-soft-*-mac-64
-openal-soft/openal-soft-*-linux-64
-
 src/test/dsfdump
 src/test/shpdump
 

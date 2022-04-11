@@ -112,38 +112,9 @@ fi
 
 PACKAGES="$PACKAGES libcurl openssl libxml-2.0 libpcre2-8 zlib"
 
-PKG_CONFIG_PATH="\
-$(pwd)/opus/opusfile-$ARCH/lib/pkgconfig:\
-$(pwd)/opus/opus-$ARCH/lib/pkgconfig:\
-$(pwd)/opus/libogg-$ARCH/install/lib/pkgconfig:\
-$(pwd)/freetype/freetype-$ARCH/lib/pkgconfig:\
-$(pwd)/libpng/libpng-$ARCH/lib/pkgconfig:\
-$(pwd)/zlib/zlib-$ARCH/lib/pkgconfig:\
-$(pwd)/cairo/cairo-$ARCH/lib/pkgconfig:\
-$(pwd)/cairo/pixman-$ARCH/lib/pkgconfig:\
-$(pwd)/curl/libcurl-$ARCH/lib/pkgconfig:\
-$(pwd)/shapelib/libproj-$ARCH/lib/pkgconfig:\
-$(pwd)/shapelib/libshape-$ARCH/lib/pkgconfig:\
-$(pwd)/ssl/openssl-$ARCH/lib/pkgconfig:\
-$(pwd)/ocr/liblept-$ARCH/lib/pkgconfig:\
-$(pwd)/ocr/tesseract-$ARCH/lib/pkgconfig:\
-$(pwd)/libxml2/libxml2-$ARCH/lib/pkgconfig:\
-$(pwd)/openal-soft/openal-soft-$OPENAL_VERSION-$ARCH/build/install/lib/pkgconfig:\
-$(pwd)/pcre2/pcre2-$ARCH/lib/pkgconfig:\
-$(pwd)/glfw/glfw-$ARCH/install/lib/pkgconfig:\
-$(pwd)/geographiclib/geographiclib-$ARCH/cmake"
-
 if [[ "$ARCH" == "linux-64" ]]; then
-	PKG_CONFIG_PATH="$PKG_CONFIG_PATH:\
-$(pwd)/glew/glew-1.13.0-$ARCH/lib/pkgconfig:\
-$(pwd)/libclipboard/libclipboard-$ARCH/install/lib/pkgconfig"
 	PACKAGES="$PACKAGES libclipboard"
-else
-	PKG_CONFIG_PATH="$PKG_CONFIG_PATH:\
-$(pwd)/glew/glew-1.13.0-$ARCH/lib/pkgconfig"
 fi
-
-export PKG_CONFIG_PATH
 
 if [[ "$1" = "--cflags" ]]; then
 	CGLM_EXTRA="-I$(pwd)/cglm/cglm-0.7.9/include"
@@ -151,7 +122,6 @@ if [[ "$1" = "--cflags" ]]; then
 	if [[ "$ARCH" = "mac-64" ]]; then
 		GLEW_EXTRA="-DLACF_GLEW_USE_NATIVE_TLS=0"
 	fi
-	LIBICONV="-I$(pwd)/libiconv/libiconv-$ARCH/include"
 	ACFUTILS_EXTRA="-I$(pwd)/src"
 elif [[ "$1" = "--libs" ]]; then
 	if [[ "$ARCH" = "win-64" ]]; then
@@ -170,8 +140,6 @@ elif [[ "$1" = "--libs" ]]; then
 			OPENAL_EXTRA="-lstdc++"
 		fi
 	fi
-	LZMA="-L$(pwd)/lzma/qmake/$ARCH -llzma"
-	LIBICONV="-L$(pwd)/libiconv/libiconv-$ARCH/lib -liconv"
 
 	if [ "$LINK_ACFUTILS" -ne 0 ]; then
 		if [[ "$ARCH" == "win-64" ]]; then
@@ -188,8 +156,7 @@ elif [[ "$1" = "--libs" ]]; then
 	fi
 fi
 
-echo $WHOLE_ARCH_ON ${ACFUTILS_EXTRA} ${LZMA} ${LIBICONV} \
-    $(pkg-config $@ $PACKAGES) \
+echo $WHOLE_ARCH_ON ${ACFUTILS_EXTRA} \
     $EXTRA $WHOLE_ARCH_OFF \
     $OPENSSL_EXTRA $DBGEXTRA ${CGLM_EXTRA} ${PCRE2_EXTRA} ${OPENAL_EXTRA} \
     ${GLEW_EXTRA} ${STACKPROT_EXTRA} ${WINBCRYPT_EXTRA} ${WINMM_EXTRA}

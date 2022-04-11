@@ -63,6 +63,9 @@ if [[ "$LINUXONLY" == 0 ]]; then
 	qmake -set WHOLE_ARCHIVE $WHOLE_ARCHIVE
 	qmake -set NOERRORS $NOERRORS
 	qmake -set CROSS_COMPILE x86_64-w64-mingw32- && \
+		echo " "
+		echo "==> Compiling for WINDOWS"
+		echo " "
 	    qmake -spec win32-g++ && make -j $NCPUS
 	if [ $? != 0 ] ; then
 		exit
@@ -75,6 +78,9 @@ if [[ "$LINUXONLY" == 0 ]]; then
 	else
 		mv "$RELEASE/libacfutils.a" "win64/libacfutils.a" || exit 1
 	fi
+	echo " "
+	echo "==> Finished compilation for WINDOWS"
+	echo " "
 fi
 
 if [[ "$DOCLEAN" == 1 ]]; then
@@ -82,7 +88,13 @@ if [[ "$DOCLEAN" == 1 ]]; then
 fi
 qmake -set DEBUG $DEBUG
 qmake -set NOERRORS $NOERRORS
+echo " "
+echo "==> Compiling for LINUX"
+echo " "
 qmake -spec linux-g++-64 && make -j $NCPUS && mv libacfutils.a lin64
+echo " "
+echo "==> Finished compilation for LINUX"
+echo " "
 if [ $? != 0 ] ; then
   exit
 fi

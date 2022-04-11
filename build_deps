@@ -62,19 +62,7 @@ if [[ "$do_clean" != 1 ]]; then
 	( cd mingw-std-threads && git checkout master )
 fi
 
-    ( cd libclipboard && ./build_libclipboard_deps && echo "=> Processed libclipboard" ) && \
-    ( [ $minimal -eq 1 ] || ( cd libjpeg && ./build_libjpeg_deps && echo "=> Processed libjpg" ) ) && \
-    # ( [ $minimal -eq 1 ] || [ $no_tesseract -eq 1 ] || ( cd ocr && ./build_ocr_deps && echo "=> Processed ocr" ) ) && \
-    ( [ $minimal -eq 1 ] || ( cd openal-soft && ./build_openal && echo "=> Processed openal-soft" ) ) && \
     ( [ $minimal -eq 1 ] || ( cd cglm && ./build_cglm && echo "=> Processed cglm" ) ) && \
-    ( [ $minimal -eq 1 ] || ( cd geographiclib && ./build_geographiclib && echo "=> Processed geographiclib" ) ) && \
-    ( cd lzma/qmake && \
-	if ( ! [ -f win-64/liblzma.a ] && [ "$minimal" -eq 0 ] ) || \
-		! [ -f linux-64/liblzma.a ];
-		then
-		./build-win-lin
-	fi
-	)
 	echo "=> All dependencies have been built"
 }
 

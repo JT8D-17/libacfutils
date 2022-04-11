@@ -33,22 +33,16 @@ minimal=$$system("test -f ../.minimal-deps; echo $?")
 
 INCLUDEPATH += ../src ../SDK/CHeaders/XPLM
 INCLUDEPATH += ../SDK/CHeaders/Widgets
-INCLUDEPATH += ../lzma/C
-INCLUDEPATH += ../zlib/zlib-linux-64/include
-INCLUDEPATH += ../curl/libcurl-linux-64/include
-INCLUDEPATH += ../openal-soft/openal-soft-1.21.1-win-64/include/AL
-INCLUDEPATH += ../opus/opusfile-win-64/include/opus
-INCLUDEPATH += ../opus/libogg-1.3.2/include
-INCLUDEPATH += ../opus/opus-linux-64/include/opus
-INCLUDEPATH += ../libxml2/libxml2-linux-64/include/libxml2
-#INCLUDEPATH += ../libxml2/libxml2-linux-64/include
-INCLUDEPATH += ../glew/glew-1.13.0-linux-64/include
-INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
+INCLUDEPATH += ../deps_lin-64/include
+INCLUDEPATH += ../deps_mingw64/include
+INCLUDEPATH += ../deps_mingw64/include/libxml2
+INCLUDEPATH += ../deps_mingw64/include/fontconfig
+INCLUDEPATH += ../deps_mingw64/include/cairo
+INCLUDEPATH += ../deps_mingw64/include/freetype2
+INCLUDEPATH += ../deps_mingw64/include/AL
+INCLUDEPATH += ../deps_mingw64/include/opus
+INCLUDEPATH += ../cglm/cglm-0.7.9/include
 INCLUDEPATH += ../junzip
-INCLUDEPATH += ../libpng/libpng-linux-64/include
-#INCLUDEPATH += ../cairo/cairo-linux-64/include/cairo
-INCLUDEPATH += ../freetype/freetype-linux-64/include/freetype2
-#INCLUDEPATH += ../opus/opusfile-0.7/include
 QMAKE_CFLAGS += -std=c11 -g -W -Wall -Wextra -fvisibility=hidden
 contains(noerrors, 0) {
 	QMAKE_CFLAGS += -Werror
@@ -138,9 +132,10 @@ win32:contains(CROSS_COMPILE, x86_64-w64-mingw32-) {
 		LIBS += $$system("../pkg-config-deps win-64 --libs")
 	}
 
+	LIBS += -L../deps_mingw64/lib -lopusfile -lopus -logg -lfreetype -lpng -lz -lcairo -lpixman-1 -lcurl -lproj -lshp -lssl -lxml2 -lopenal -lpcre2-8 -lglfw3 -lGeographic -lglew32mx -llzma
 	LIBS += -L../SDK/Libraries/Win -lXPLM_64
 	LIBS += -L../SDK/Libraries/Win -lXPWidgets_64
-	LIBS += -lglu32 -lopengl32
+	LIBS += -L../libacfutils/GL_for_Windows/lib -lglu32 -lopengl32
 	LIBS += -ldbghelp
 }
 
@@ -158,6 +153,7 @@ linux-g++-64 {
 	QMAKE_CFLAGS += -Wno-misleading-indentation
 	LIBS += $$system("../pkg-config-deps linux-64 \
 	    --static-openal --libs")
+	LIBS += -L../deps_lin-64/lib -lopusfile -lopus -logg -lfreetype -lpng -lz -lcairo -lpixman-1 -lcurl -lproj -lshp -lssl -lxml2 -lopenal -lpcre2-8 -lglfw3 -lGeographic -lGLEWmx -lclipboard -llzma -liconv
 }
 
 macx {
